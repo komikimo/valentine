@@ -18,9 +18,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* === Animated Pastel Background === */
+.pastel-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(-45deg, #ffd6e8, #f8cdda, #f6e6ff, #ffe3f1);
     background-size: 400% 400%;
-    animation: gradientMove 12s ease infinite;
+    animation: gradientMove 15s ease infinite;
+    z-index: 0;
 }
 
 @keyframes gradientMove {
@@ -29,76 +37,22 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-.container {
-    position: relative;
-    background: white;
-    padding: 50px 60px;
-    border-radius: 25px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    text-align: center;
-    max-width: 600px;
-    z-index: 2;
-}
-
-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: #ff6f91;
-    margin-bottom: 10px;
-}
-
-.flower {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.question {
-    font-size: 1.3rem;
-    color: #333;
-    margin-bottom: 40px;
-    min-height: 60px;
-}
-
-.buttons {
-    position: relative;
-    width: 400px;
-    height: 120px;
-    margin: auto;
-}
-
-button {
-    position: absolute;
-    padding: 12px 30px;
-    font-size: 1rem;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-}
-
-#yesBtn {
-    background: linear-gradient(45deg, #ff8ba7, #ff6f91);
-    color: white;
-    left: 20px;
-    top: 40px;
-}
-
-#yesBtn:hover { transform: scale(1.05); }
-
-#noBtn {
-    background: #d9d9d9;
-    color: #444;
-    left: 220px;
-    top: 40px;
-    transition: 0.25s ease;
-}
-
-/* Sakura petals */
-.petal {
+/* Sakura layer */
+.sakura-container {
     position: fixed;
-    top: -10px;
-    font-size: 18px;
-    animation: fall linear forwards;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.petal {
+    position: absolute;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear forwards;
+    opacity: 0.9;
 }
 
 @keyframes fall {
@@ -108,10 +62,74 @@ button {
     }
 }
 
+/* Card */
+.container {
+    position: relative;
+    background: white;
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    z-index: 2;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #ff6f91;
+}
+
+.flower {
+    font-size: 1.6rem;
+    margin: 10px 0;
+}
+
+.question {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    min-height: 60px;
+}
+
+/* Button area strictly limited */
+.buttons {
+    position: relative;
+    width: 100%;
+    height: 100px;
+}
+
+button {
+    position: absolute;
+    padding: 10px 24px;
+    font-size: 1rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+#yesBtn {
+    background: linear-gradient(45deg, #ff8ba7, #ff6f91);
+    color: white;
+    left: 10%;
+    top: 40px;
+}
+
+#noBtn {
+    background: #d9d9d9;
+    color: #444;
+    left: 60%;
+    top: 40px;
+    transition: 0.25s ease;
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="pastel-bg"></div>
+<div class="sakura-container" id="sakura"></div>
 
 <div class="container">
     <h1>✨ Hey N'Monet ✨</h1>
@@ -152,7 +170,6 @@ const messages = [
 ];
 
 let index = 0;
-
 const question = document.getElementById("question");
 const noBtn = document.getElementById("noBtn");
 const area = document.getElementById("buttonArea");
@@ -171,9 +188,14 @@ function moveButton() {
     noBtn.style.top = randomY + "px";
 }
 
+/* Works for desktop + iPhone/iPad */
 noBtn.addEventListener("mouseenter", moveButton);
-noBtn.addEventListener("click", moveButton);
+noBtn.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    moveButton();
+});
 
+/* Yes click */
 document.getElementById("yesBtn").addEventListener("click", function() {
     question.innerHTML =
         "I had a feeling N'Monet would say yes 💫<br><br>" +
@@ -183,18 +205,19 @@ document.getElementById("yesBtn").addEventListener("click", function() {
 });
 
 /* Sakura generator */
+const sakura = document.getElementById("sakura");
+
 function createPetal() {
     const petal = document.createElement("div");
     petal.classList.add("petal");
     petal.innerHTML = "🌸";
     petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = (5 + Math.random() * 5) + "s";
-    document.body.appendChild(petal);
-
-    setTimeout(() => petal.remove(), 10000);
+    petal.style.animationDuration = (4 + Math.random() * 4) + "s";
+    sakura.appendChild(petal);
+    setTimeout(() => petal.remove(), 8000);
 }
 
-setInterval(createPetal, 500);
+setInterval(createPetal, 300);
 
 </script>
 
