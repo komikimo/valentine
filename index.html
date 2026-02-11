@@ -3,180 +3,212 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For N'Monet</title>
+<title>Hey N'Monet</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+* { box-sizing: border-box; }
+
 body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #fceff5, #f4f0ff);
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Inter', sans-serif;
-    overflow: hidden;
+    background: linear-gradient(135deg, #f8cdda, #f6e6ff);
 }
 
+/* Floating soft shapes (Layer 2) */
+.background-shape {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: float 10s infinite alternate ease-in-out;
+}
+
+.shape1 { top: 10%; left: 15%; }
+.shape2 { bottom: 15%; right: 20%; animation-delay: 3s; }
+.shape3 { top: 50%; left: 70%; animation-delay: 5s; }
+
+@keyframes float {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-30px); }
+}
+
+/* Card */
 .container {
+    position: relative;
+    background: white;
+    padding: 50px 60px;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     text-align: center;
-    max-width: 700px;
-    padding: 40px;
-}
-
-h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    color: #444;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
+    max-width: 600px;
+    z-index: 2;
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
-    color: #2d2d2d;
-    min-height: 120px;
-    margin-bottom: 50px;
+    color: #ff6f91;
+    margin-bottom: 15px;
+}
+
+.flower {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.question {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 40px;
+    min-height: 60px;
     transition: 0.3s;
 }
 
 .buttons {
     position: relative;
-    width: 300px;
-    margin: 0 auto;
+    width: 320px;
+    margin: auto;
     height: 60px;
 }
 
 button {
     padding: 12px 30px;
-    font-size: 0.95rem;
-    border-radius: 25px;
+    font-size: 1rem;
+    border-radius: 30px;
     border: none;
     cursor: pointer;
     transition: 0.2s;
 }
 
 #yesBtn {
-    background: #e89ab0;
+    background: linear-gradient(45deg, #ff8ba7, #ff6f91);
     color: white;
     position: absolute;
-    left: 0;   /* คงที่ด้านซ้าย */
+    left: 0;
 }
 
-#yesBtn:hover {
-    opacity: 0.85;
-}
+#yesBtn:hover { transform: scale(1.05); }
 
 #noBtn {
-    background: #dcdcdc;
-    color: #333;
+    background: #d9d9d9;
+    color: #444;
     position: absolute;
-    right: 0;  /* เริ่มด้านขวา */
+    right: 0;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h2>For N'Monet</h2>
+<div class="background-shape shape1"></div>
+<div class="background-shape shape2"></div>
+<div class="background-shape shape3"></div>
 
-    <h1 id="question">
-        N'Monet,<br><br>
-        I wanted to ask something simple.<br>
-        Would N'Monet be my Valentine this year?
-    </h1>
+<div class="container">
+    <h1>✨ Hey N'Monet ✨</h1>
+    <div class="flower">🌸</div>
+    <div class="question" id="question">
+        Will you be my Valentine?
+    </div>
 
     <div class="buttons">
-        <button id="yesBtn">Yes</button>
-        <button id="noBtn">No</button>
+        <button id="yesBtn">Yes 💫</button>
+        <button id="noBtn">No 🙈</button>
     </div>
 </div>
 
 <script>
 
 const messages = [
-"N'Monet is sure about that?",
-"Maybe N'Monet clicked too fast.",
-"I’ll stay calm and ask again.",
-"This page was made only for N'Monet.",
-"No pressure at all.",
-"N'Monet still thinking?",
-"I respect N'Monet’s determination.",
-"Maybe destiny is curious too.",
-"I’m patient.",
-"Still no?",
-"N'Monet is making this interesting.",
-"I admire the resistance.",
-"Are we negotiating now, N'Monet?",
-"This is kind of cute though.",
-"I think N'Monet is smiling.",
-"Just imagine saying yes once.",
-"It might actually be nice.",
-"I promise good company.",
-"And a comfortable atmosphere.",
-"N'Monet already opened this link.",
-"That means something.",
-"Still pressing no?",
-"I respect the effort.",
-"But I’m still here.",
-"Maybe fate is testing N'Monet.",
-"I’ll keep asking gently.",
-"N'Monet can’t escape the question forever.",
-"I’m persistent in a calm way.",
-"There’s a difference.",
-"Still here with me?",
-"That says something too.",
-"I think this is looping.",
-"And I’m okay with that.",
-"One day N'Monet might laugh about this.",
-"Maybe today.",
-"Or after clicking yes.",
-"No rush.",
-"I can wait.",
-"But the button might keep moving.",
-"Interesting strategy from N'Monet.",
-"I didn’t expect less.",
-"So… final answer?",
-"Or we go again?",
-"This is turning into a story.",
-"N'Monet vs destiny.",
-"Who will win?",
-"I’m quietly rooting for yes.",
-"Still no?",
-"I admire the stamina.",
-"Last chance… or maybe not."
+"N'Monet is sure about that? 😌",
+"Maybe that was accidental ✨",
+"Wait… think again 🌸",
+"I made this only for N'Monet 💭",
+"No pressure at all 🤍",
+"N'Monet still thinking? 👀",
+"This is kind of cute though 😆",
+"I admire the determination 💪",
+"Are we negotiating now? 😏",
+"Maybe destiny is involved ✨",
+"I’m patient 🌷",
+"Still no? 🙈",
+"N'Monet is making this interesting 😌",
+"I promise good vibes only 🌸",
+"Just imagine saying yes once 💫",
+"It might be nice 🌷",
+"No awkwardness guaranteed 🤍",
+"N'Monet opened the link already 👀",
+"That means something ✨",
+"Still pressing no? 😆",
+"I respect the effort 💪",
+"But I’m still here 😌",
+"Maybe fate is curious 🌸",
+"I’ll keep asking gently 💭",
+"N'Monet can’t escape forever 😏",
+"I’m calm but persistent 💫",
+"This is turning into a story 📖",
+"N'Monet vs destiny ✨",
+"Who will win? 😆",
+"I’m quietly rooting for yes 🌷",
+"Still no? 🙈",
+"I admire the stamina 💪",
+"This is getting fun now 😌",
+"Are we looping? 🔄",
+"I think we are ✨",
+"And I’m okay with that 🌸",
+"One day N'Monet might laugh about this 😆",
+"Maybe today? 💫",
+"No rush at all 🤍",
+"I can wait 🌷",
+"But the button won’t 😏",
+"Interesting strategy 👀",
+"I didn’t expect less ✨",
+"So… final answer? 😌",
+"Or go again? 🔄",
+"This is legendary already 💫",
+"N'Monet is brave 💪",
+"I’m still here 🌸",
+"Still no? 😆",
+"Alright… one more round ✨"
 ];
 
 let index = 0;
-
 const question = document.getElementById("question");
 const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
 
 function moveButton() {
     index = (index + 1) % messages.length;
     question.innerHTML = messages[index];
 
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 60);
+    const maxX = window.innerWidth - 120;
+    const maxY = window.innerHeight - 60;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
 
-yesBtn.addEventListener("click", function() {
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+document.getElementById("yesBtn").addEventListener("click", function() {
     question.innerHTML =
-        "I had a feeling N'Monet would say yes.<br><br>" +
-        "Thank you, N'Monet.<br>" +
-        "That really means a lot to me.";
+        "I had a feeling N'Monet would say yes 💫<br><br>" +
+        "Thank you for making this moment special 🌸";
     noBtn.style.display = "none";
-    yesBtn.style.display = "none";
+    this.style.display = "none";
 });
 
 </script>
