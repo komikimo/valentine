@@ -11,7 +11,7 @@
 body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    background: linear-gradient(135deg, #fceff5, #f4f0ff);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,37 +21,48 @@ body {
 
 .container {
     text-align: center;
-    max-width: 650px;
+    max-width: 700px;
     padding: 40px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #444;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
-    color: #2c2c2c;
-    margin-bottom: 40px;
+    color: #2d2d2d;
     min-height: 120px;
+    margin-bottom: 50px;
     transition: 0.3s;
 }
 
 .buttons {
     position: relative;
+    width: 300px;
+    margin: 0 auto;
+    height: 60px;
 }
 
 button {
-    padding: 12px 32px;
+    padding: 12px 30px;
     font-size: 0.95rem;
     border-radius: 25px;
-    border: 1px solid #444;
-    background: white;
+    border: none;
     cursor: pointer;
     transition: 0.2s;
 }
 
 #yesBtn {
-    background: #2c2c2c;
+    background: #e89ab0;
     color: white;
-    margin-right: 40px;
+    position: absolute;
+    left: 0;   /* คงที่ด้านซ้าย */
 }
 
 #yesBtn:hover {
@@ -59,7 +70,10 @@ button {
 }
 
 #noBtn {
+    background: #dcdcdc;
+    color: #333;
     position: absolute;
+    right: 0;  /* เริ่มด้านขวา */
 }
 </style>
 </head>
@@ -67,10 +81,12 @@ button {
 <body>
 
 <div class="container">
+    <h2>For N'Monet</h2>
+
     <h1 id="question">
-        Hey N'Monet,<br><br>
-        I wanted to ask you something simple.<br>
-        Would you be my Valentine this year?
+        N'Monet,<br><br>
+        I wanted to ask something simple.<br>
+        Would N'Monet be my Valentine this year?
     </h1>
 
     <div class="buttons">
@@ -82,55 +98,56 @@ button {
 <script>
 
 const messages = [
-"Are you sure, N'Monet?",
-"I feel like that click was accidental.",
-"Maybe give it another thought?",
-"I promise this question comes with good intentions.",
-"No pressure, though.",
-"Still thinking?",
-"I respect the determination.",
-"This page was made specifically for you.",
-"I wouldn’t have sent it to anyone else.",
-"Maybe destiny is slightly involved.",
-"Or maybe just curiosity.",
-"I’ll stay patient.",
+"N'Monet is sure about that?",
+"Maybe N'Monet clicked too fast.",
+"I’ll stay calm and ask again.",
+"This page was made only for N'Monet.",
+"No pressure at all.",
+"N'Monet still thinking?",
+"I respect N'Monet’s determination.",
+"Maybe destiny is curious too.",
+"I’m patient.",
 "Still no?",
-"You’re making this interesting.",
+"N'Monet is making this interesting.",
 "I admire the resistance.",
-"Are we negotiating now?",
-"Okay, that was bold.",
-"You know this is kind of funny.",
-"I think you’re smiling.",
+"Are we negotiating now, N'Monet?",
+"This is kind of cute though.",
+"I think N'Monet is smiling.",
 "Just imagine saying yes once.",
 "It might actually be nice.",
-"I promise no awkwardness.",
-"Just good company.",
-"And maybe a small memory.",
-"You already opened this link.",
-"That counts for something.",
+"I promise good company.",
+"And a comfortable atmosphere.",
+"N'Monet already opened this link.",
+"That means something.",
 "Still pressing no?",
 "I respect the effort.",
-"But I’m not giving up yet.",
-"Maybe this is fate testing you.",
-"I’ll keep asking calmly.",
-"You can’t escape the question forever.",
-"I’m persistent, not desperate.",
+"But I’m still here.",
+"Maybe fate is testing N'Monet.",
+"I’ll keep asking gently.",
+"N'Monet can’t escape the question forever.",
+"I’m persistent in a calm way.",
 "There’s a difference.",
-"Still here?",
+"Still here with me?",
 "That says something too.",
-"Are we looping?",
-"I think we are.",
+"I think this is looping.",
 "And I’m okay with that.",
-"One day you’ll laugh about this.",
+"One day N'Monet might laugh about this.",
 "Maybe today.",
-"Or maybe after you click yes.",
+"Or after clicking yes.",
 "No rush.",
 "I can wait.",
 "But the button might keep moving.",
-"Interesting strategy.",
-"I didn’t expect less from you.",
+"Interesting strategy from N'Monet.",
+"I didn’t expect less.",
 "So… final answer?",
-"Or should we go again?"
+"Or we go again?",
+"This is turning into a story.",
+"N'Monet vs destiny.",
+"Who will win?",
+"I’m quietly rooting for yes.",
+"Still no?",
+"I admire the stamina.",
+"Last chance… or maybe not."
 ];
 
 let index = 0;
@@ -146,8 +163,8 @@ function moveButton() {
     index = (index + 1) % messages.length;
     question.innerHTML = messages[index];
 
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
@@ -155,9 +172,9 @@ function moveButton() {
 
 yesBtn.addEventListener("click", function() {
     question.innerHTML =
-        "I had a feeling you'd say yes.<br><br>" +
+        "I had a feeling N'Monet would say yes.<br><br>" +
         "Thank you, N'Monet.<br>" +
-        "You just made my day a little better.";
+        "That really means a lot to me.";
     noBtn.style.display = "none";
     yesBtn.style.display = "none";
 });
