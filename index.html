@@ -1,449 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine? 💕</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For N'Monet</title>
 
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            overflow: hidden;
-            position: relative;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-        /* Floating hearts background */
-        .heart-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
-        }
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
 
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(45deg);
-            animation: float-up 15s infinite ease-in;
-        }
+.container {
+    text-align: center;
+    max-width: 650px;
+    padding: 40px;
+}
 
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-        }
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #2c2c2c;
+    margin-bottom: 40px;
+    min-height: 120px;
+    transition: 0.3s;
+}
 
-        .heart::before {
-            top: -10px;
-            left: 0;
-        }
+.buttons {
+    position: relative;
+}
 
-        .heart::after {
-            top: 0;
-            left: 10px;
-        }
+button {
+    padding: 12px 32px;
+    font-size: 0.95rem;
+    border-radius: 25px;
+    border: 1px solid #444;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-        @keyframes float-up {
-            0% {
-                transform: translateY(100vh) rotate(45deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(45deg);
-                opacity: 0;
-            }
-        }
+#yesBtn {
+    background: #2c2c2c;
+    color: white;
+    margin-right: 40px;
+}
 
-        .container {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 60px 50px;
-            border-radius: 30px;
-            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
-            width: 90%;
-            backdrop-filter: blur(10px);
-            transition: all 0.5s ease;
-        }
+#yesBtn:hover {
+    opacity: 0.85;
+}
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: #c2185b;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: fadeInDown 1s ease;
-        }
-
-        .question {
-            font-size: 2rem;
-            color: #4a4a4a;
-            margin: 30px 0 50px 0;
-            line-height: 1.4;
-            font-weight: 400;
-            animation: fadeIn 1s ease 0.3s both;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            min-height: 120px;
-            animation: fadeIn 1s ease 0.6s both;
-        }
-
-        button {
-            font-family: 'Playfair Display', serif;
-            padding: 18px 45px;
-            font-size: 1.5rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            letter-spacing: 1px;
-        }
-
-        .yes-btn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            animation: pulse 2s infinite;
-        }
-
-        .yes-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(245, 87, 108, 0.5);
-        }
-
-        .no-btn {
-            background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
-            color: #666;
-            position: absolute;
-            transition: all 0.15s ease;
-        }
-
-        .no-btn:hover {
-            background: linear-gradient(135deg, #d0d0d0 0%, #b0b0b0 100%);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        .success-message {
-            display: none;
-            animation: fadeInScale 0.8s ease;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .success-message h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            color: #c2185b;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .success-message p {
-            font-size: 1.8rem;
-            color: #4a4a4a;
-            line-height: 1.6;
-        }
-
-        .heart-icon {
-            font-size: 6rem;
-            color: #f5576c;
-            margin-bottom: 20px;
-            animation: heartBeat 1.5s infinite;
-        }
-
-        @keyframes heartBeat {
-            0%, 100% {
-                transform: scale(1);
-            }
-            10%, 30% {
-                transform: scale(0.9);
-            }
-            20%, 40%, 60%, 80% {
-                transform: scale(1.1);
-            }
-            50%, 70% {
-                transform: scale(1.05);
-            }
-        }
-
-        .emoji {
-            font-size: 4rem;
-            margin: 20px 0;
-            animation: bounce 1s ease 0.9s both;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        /* Confetti */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #f093fb;
-            animation: confetti-fall 3s linear infinite;
-        }
-
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .question {
-                font-size: 1.5rem;
-            }
-            button {
-                font-size: 1.2rem;
-                padding: 15px 35px;
-            }
-            .container {
-                padding: 40px 30px;
-            }
-        }
-    </style>
+#noBtn {
+    position: absolute;
+}
+</style>
 </head>
+
 <body>
-    <!-- Floating hearts background -->
-    <div class="heart-bg" id="heartBg"></div>
 
-    <div class="container" id="mainContainer">
-        <div id="questionSection">
-            <h1>💝 Valentine's Day 💝</h1>
-            <div class="emoji">🌹</div>
-            <p class="question" id="questionText">Will You Be My Valentine?</p>
-            
-            <div class="buttons">
-                <button class="yes-btn" onclick="sayYes()">Yes! 💕</button>
-                <button class="no-btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No</button>
-            </div>
-        </div>
+<div class="container">
+    <h1 id="question">
+        Hey N'Monet,<br><br>
+        I wanted to ask you something simple.<br>
+        Would you be my Valentine this year?
+    </h1>
 
-        <div class="success-message" id="successMessage">
-            <div class="heart-icon">💖</div>
-            <h2>Yay! 🎉</h2>
-            <p>Yes, I knew you would say yes!</p>
-            <p style="margin-top: 20px;">You made me the happiest person! 💕</p>
-            <div class="emoji" style="animation-delay: 0.5s;">😊✨</div>
-        </div>
+    <div class="buttons">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
     </div>
+</div>
 
-    <script>
-        let attempts = 0;
-        const noBtn = document.getElementById('noBtn');
-        const questionText = document.getElementById('questionText');
-        
-        const messages = [
-            "Will You Be My Valentine?",
-            "Are you sure? 🥺",
-            "Really? Think again! 💭",
-            "The universe wants us together! ✨",
-            "You can't escape destiny! 💫",
-            "Just say yes already! 💝",
-            "Come on, you know you want to! 😊",
-            "Resistance is futile! 💪",
-            "Pretty please? 🥹",
-            "You cannot escape the destiny! 🌟",
-            "Why are you running? 🏃‍♀️",
-            "Don't make this harder than it needs to be! 😅",
-            "I'll wait forever if I have to... ⏰",
-            "The No button is getting tired! 😴",
-            "What would it take? 🤔",
-            "I made this whole website for you! 💻",
-            "You're making the button sad! 😢",
-            "Think of all the good times! 🌈",
-            "Your heart knows the answer! 💗",
-            "Stop fighting it! 🛑",
-            "The stars have aligned! ⭐",
-            "This is meant to be! 💫",
-            "You know you want to say yes! 😏",
-            "I can do this all day! 💪",
-            "The button will keep running! 🏃",
-            "Destiny is calling! 📞",
-            "Love always wins! 🏆",
-            "You can't hide from love! 💘",
-            "Just give in already! 😆",
-            "I promise it'll be worth it! 🎁",
-            "Think about it... 🧠",
-            "Your finger is hovering over yes! 👆",
-            "I see you smiling! 😊",
-            "This is getting ridiculous! 🤪",
-            "Even the No button wants you to say yes! 🔘",
-            "You're being stubborn! 😤",
-            "Let's make this official! 📝",
-            "Stop playing hard to get! 😜",
-            "You've clicked No 30+ times! 🔢",
-            "Aren't you tired yet? 😩",
-            "I believe in us! 🌟",
-            "Take a chance on love! 🎲",
-            "The universe is watching! 👀",
-            "You know what to do! 💡",
-            "Deep down you want to! ❤️",
-            "This could be magical! ✨",
-            "Why resist happiness? 😊",
-            "Say yes and make my day! ☀️",
-            "You're almost there! 🎯",
-            "Fine, you cannot escape the destiny! 🌟"
-        ];
+<script>
 
-        // Create floating hearts
-        function createHearts() {
-            const heartBg = document.getElementById('heartBg');
-            for (let i = 0; i < 15; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = Math.random() * 15 + 's';
-                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                heartBg.appendChild(heart);
-            }
-        }
+const messages = [
+"Are you sure, N'Monet?",
+"I feel like that click was accidental.",
+"Maybe give it another thought?",
+"I promise this question comes with good intentions.",
+"No pressure, though.",
+"Still thinking?",
+"I respect the determination.",
+"This page was made specifically for you.",
+"I wouldn’t have sent it to anyone else.",
+"Maybe destiny is slightly involved.",
+"Or maybe just curiosity.",
+"I’ll stay patient.",
+"Still no?",
+"You’re making this interesting.",
+"I admire the resistance.",
+"Are we negotiating now?",
+"Okay, that was bold.",
+"You know this is kind of funny.",
+"I think you’re smiling.",
+"Just imagine saying yes once.",
+"It might actually be nice.",
+"I promise no awkwardness.",
+"Just good company.",
+"And maybe a small memory.",
+"You already opened this link.",
+"That counts for something.",
+"Still pressing no?",
+"I respect the effort.",
+"But I’m not giving up yet.",
+"Maybe this is fate testing you.",
+"I’ll keep asking calmly.",
+"You can’t escape the question forever.",
+"I’m persistent, not desperate.",
+"There’s a difference.",
+"Still here?",
+"That says something too.",
+"Are we looping?",
+"I think we are.",
+"And I’m okay with that.",
+"One day you’ll laugh about this.",
+"Maybe today.",
+"Or maybe after you click yes.",
+"No rush.",
+"I can wait.",
+"But the button might keep moving.",
+"Interesting strategy.",
+"I didn’t expect less from you.",
+"So… final answer?",
+"Or should we go again?"
+];
 
-        function moveButton() {
-            attempts++;
-            
-            // Update question text
-            if (attempts < messages.length) {
-                questionText.textContent = messages[attempts];
-            } else {
-                questionText.textContent = messages[messages.length - 1];
-            }
+let index = 0;
 
-            // Get button and container dimensions
-            const container = document.querySelector('.buttons');
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = noBtn.getBoundingClientRect();
-            
-            // Calculate max positions to keep button in container
-            const maxX = containerRect.width - btnRect.width;
-            const maxY = containerRect.height - btnRect.height;
-            
-            // Generate random position
-            const randomX = Math.random() * maxX - maxX/2;
-            const randomY = Math.random() * maxY - maxY/2;
-            
-            // Move the button
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+const question = document.getElementById("question");
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
 
-            // Make yes button bigger with each attempt
-            const yesBtn = document.querySelector('.yes-btn');
-            const newSize = 1 + (attempts * 0.05);
-            yesBtn.style.transform = `scale(${newSize})`;
-        }
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
 
-        function sayYes() {
-            // Create confetti effect
-            createConfetti();
-            
-            // Hide question and show success message
-            document.getElementById('questionSection').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Change container background
-            const container = document.getElementById('mainContainer');
-            container.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(255,240,245,0.98) 100%)';
-        }
+function moveButton() {
+    index = (index + 1) % messages.length;
+    question.innerHTML = messages[index];
 
-        function createConfetti() {
-            const colors = ['#f093fb', '#f5576c', '#4facfe', '#ffd700', '#ff6b9d'];
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = Math.random() * 2 + 's';
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => confetti.remove(), 5000);
-            }
-        }
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
 
-        // Initialize
-        createHearts();
-    </script>
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+yesBtn.addEventListener("click", function() {
+    question.innerHTML =
+        "I had a feeling you'd say yes.<br><br>" +
+        "Thank you, N'Monet.<br>" +
+        "You just made my day a little better.";
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+});
+
+</script>
+
 </body>
 </html>
