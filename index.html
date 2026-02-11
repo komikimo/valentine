@@ -18,36 +18,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #f8cdda, #f6e6ff);
+    background: linear-gradient(-45deg, #ffd6e8, #f8cdda, #f6e6ff, #ffe3f1);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
 }
 
-/* Floating soft shapes (Layer 2) */
-.background-shape {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: rgba(255,255,255,0.25);
-    border-radius: 50%;
-    filter: blur(40px);
-    animation: float 10s infinite alternate ease-in-out;
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.shape1 { top: 10%; left: 15%; }
-.shape2 { bottom: 15%; right: 20%; animation-delay: 3s; }
-.shape3 { top: 50%; left: 70%; animation-delay: 5s; }
-
-@keyframes float {
-    from { transform: translateY(0px); }
-    to { transform: translateY(-30px); }
-}
-
-/* Card */
 .container {
     position: relative;
     background: white;
     padding: 50px 60px;
     border-radius: 25px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     text-align: center;
     max-width: 600px;
     z-index: 2;
@@ -57,12 +44,12 @@ h1 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     color: #ff6f91;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .flower {
     font-size: 1.8rem;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .question {
@@ -70,30 +57,29 @@ h1 {
     color: #333;
     margin-bottom: 40px;
     min-height: 60px;
-    transition: 0.3s;
 }
 
 .buttons {
     position: relative;
-    width: 320px;
+    width: 400px;
+    height: 120px;
     margin: auto;
-    height: 60px;
 }
 
 button {
+    position: absolute;
     padding: 12px 30px;
     font-size: 1rem;
     border-radius: 30px;
     border: none;
     cursor: pointer;
-    transition: 0.2s;
 }
 
 #yesBtn {
     background: linear-gradient(45deg, #ff8ba7, #ff6f91);
     color: white;
-    position: absolute;
-    left: 0;
+    left: 20px;
+    top: 40px;
 }
 
 #yesBtn:hover { transform: scale(1.05); }
@@ -101,18 +87,31 @@ button {
 #noBtn {
     background: #d9d9d9;
     color: #444;
-    position: absolute;
-    right: 0;
+    left: 220px;
+    top: 40px;
+    transition: 0.25s ease;
+}
+
+/* Sakura petals */
+.petal {
+    position: fixed;
+    top: -10px;
+    font-size: 18px;
+    animation: fall linear forwards;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.6;
+    }
 }
 
 </style>
 </head>
 
 <body>
-
-<div class="background-shape shape1"></div>
-<div class="background-shape shape2"></div>
-<div class="background-shape shape3"></div>
 
 <div class="container">
     <h1>✨ Hey N'Monet ✨</h1>
@@ -121,7 +120,7 @@ button {
         Will you be my Valentine?
     </div>
 
-    <div class="buttons">
+    <div class="buttons" id="buttonArea">
         <button id="yesBtn">Yes 💫</button>
         <button id="noBtn">No 🙈</button>
     </div>
@@ -131,76 +130,48 @@ button {
 
 const messages = [
 "N'Monet is sure about that? 😌",
-"Maybe that was accidental ✨",
-"Wait… think again 🌸",
-"I made this only for N'Monet 💭",
+"Maybe think one more time ✨",
+"This was made for N'Monet 🌸",
 "No pressure at all 🤍",
-"N'Monet still thinking? 👀",
-"This is kind of cute though 😆",
+"N'Monet is making this interesting 😆",
 "I admire the determination 💪",
-"Are we negotiating now? 😏",
-"Maybe destiny is involved ✨",
-"I’m patient 🌷",
-"Still no? 🙈",
-"N'Monet is making this interesting 😌",
-"I promise good vibes only 🌸",
-"Just imagine saying yes once 💫",
-"It might be nice 🌷",
-"No awkwardness guaranteed 🤍",
-"N'Monet opened the link already 👀",
-"That means something ✨",
-"Still pressing no? 😆",
-"I respect the effort 💪",
-"But I’m still here 😌",
-"Maybe fate is curious 🌸",
-"I’ll keep asking gently 💭",
-"N'Monet can’t escape forever 😏",
-"I’m calm but persistent 💫",
-"This is turning into a story 📖",
-"N'Monet vs destiny ✨",
+"Are we negotiating? 😏",
+"Maybe destiny is smiling ✨",
+"I’m still calm 🌷",
+"Still pressing no? 🙈",
+"This is getting cute 😌",
+"N'Monet vs fate 💫",
 "Who will win? 😆",
-"I’m quietly rooting for yes 🌷",
-"Still no? 🙈",
-"I admire the stamina 💪",
-"This is getting fun now 😌",
-"Are we looping? 🔄",
-"I think we are ✨",
-"And I’m okay with that 🌸",
-"One day N'Monet might laugh about this 😆",
-"Maybe today? 💫",
-"No rush at all 🤍",
+"I’m quietly rooting for yes 🌸",
+"Still here? 👀",
+"I respect the stamina 💪",
+"Are we looping again? 🔄",
 "I can wait 🌷",
-"But the button won’t 😏",
-"Interesting strategy 👀",
-"I didn’t expect less ✨",
-"So… final answer? 😌",
-"Or go again? 🔄",
-"This is legendary already 💫",
-"N'Monet is brave 💪",
-"I’m still here 🌸",
-"Still no? 😆",
-"Alright… one more round ✨"
+"But the button cannot 😏",
+"Final answer, N'Monet? ✨"
 ];
 
 let index = 0;
+
 const question = document.getElementById("question");
 const noBtn = document.getElementById("noBtn");
+const area = document.getElementById("buttonArea");
 
 function moveButton() {
     index = (index + 1) % messages.length;
     question.innerHTML = messages[index];
 
-    const maxX = window.innerWidth - 120;
-    const maxY = window.innerHeight - 60;
+    const maxX = area.clientWidth - noBtn.offsetWidth;
+    const maxY = area.clientHeight - noBtn.offsetHeight;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
 
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
 }
 
-noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("mouseenter", moveButton);
 noBtn.addEventListener("click", moveButton);
 
 document.getElementById("yesBtn").addEventListener("click", function() {
@@ -210,6 +181,20 @@ document.getElementById("yesBtn").addEventListener("click", function() {
     noBtn.style.display = "none";
     this.style.display = "none";
 });
+
+/* Sakura generator */
+function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.innerHTML = "🌸";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(petal);
+
+    setTimeout(() => petal.remove(), 10000);
+}
+
+setInterval(createPetal, 500);
 
 </script>
 
